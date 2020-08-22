@@ -10,18 +10,13 @@ function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  // A snippet of code which rans based on a specific condition/variable
   useEffect(() => {
-    // When the row appears on the screen, makes a request to show the movies
-    // if [] => run once when the row loads, and dont run again
     async function fetchData() {
       const request = await axios.get(fetchUrl);
-      // "https://api.themoviedb.org/3/discover/tv?api-key=${API_KEY}&with_networks=213"
       setMovies(request.data.results);
       return request;
     }
     fetchData();
-    // Any variable pulled outsited of useEffect scope has to go inside the [] at the end of the method
   }, [fetchUrl]);
 
   const opts = {
@@ -47,10 +42,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
   return (
     <div className="row">
-      {/* Passing Row title as text for h2 */}
       <h2>{title}</h2>
       <div className="row__posters">
-        {/* several row_poster(s) */}
         {movies.map((movie) => (
           <img
             className={`row__poster ${isLargeRow && "row__posterLarge"}`}
